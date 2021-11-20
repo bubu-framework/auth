@@ -16,10 +16,9 @@ class Authorization
             $db->select($value);
         }
 
-        $db->where([
-            'id',
-            ['?' => $userId]
-        ]);
+        $db->where(
+            Database::expr()->eq('id', '?', $userId)
+        );
         $results = $db->fetch();
         foreach ($results as $value) {
             if ($value !== 1) {
@@ -44,10 +43,9 @@ class Authorization
         $userIsset =
             Database::queryBuilder('authorization')
                 ->select('id')
-                ->where([
-                    'id',
-                    ['?' => $userId]
-                ])
+                ->where(
+                    Database::expr()->eq('id', '?', $userId)
+                )
                 ->fetch();
 
         if ($userIsset === false) {
@@ -66,10 +64,9 @@ class Authorization
             $listAuth[$key] = $value;
         }
         $db->update($listAuth);
-        $db->where([
-            'id',
-            ['id' => $userId]
-        ]);
+        $db->where(
+            Database::expr()->eq('id', '?', $userId)
+        );
         $db->execute();
     }
 
@@ -85,10 +82,9 @@ class Authorization
                 $authorization => $auth
             ]
         );
-        $db->where([
-            'id',
-            ['id' => $userId]
-        ]);
+        $db->where(
+            Database::expr()->eq('id', '?', $userId)
+        );
         $db->execute();
     }
 }
