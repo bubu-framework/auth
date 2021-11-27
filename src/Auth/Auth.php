@@ -23,8 +23,8 @@ class Auth
             Database::queryBuilder('users')
                 ->select('id')
                 ->where(
-                    Database::expr()->eq('id', '?', $id),
-                    Database::expr()->eq('token', '?', $token)
+                    Database::expr()->eq('id', $id),
+                    Database::expr()->eq('token', $token)
                 )
                 ->fetch();
             if ($userIsset === false) return false;

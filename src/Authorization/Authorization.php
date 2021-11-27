@@ -17,7 +17,7 @@ class Authorization
         }
 
         $db->where(
-            Database::expr()->eq('id', '?', $userId)
+            Database::expr()->eq('id', $userId)
         );
         $results = $db->fetch();
         foreach ($results as $value) {
@@ -44,7 +44,7 @@ class Authorization
             Database::queryBuilder('authorization')
                 ->select('id')
                 ->where(
-                    Database::expr()->eq('id', '?', $userId)
+                    Database::expr()->eq('id', $userId)
                 )
                 ->fetch();
 
@@ -65,7 +65,7 @@ class Authorization
         }
         $db->update($listAuth);
         $db->where(
-            Database::expr()->eq('id', '?', $userId)
+            Database::expr()->eq('id', $userId)
         );
         $db->execute();
     }
@@ -83,7 +83,7 @@ class Authorization
             ]
         );
         $db->where(
-            Database::expr()->eq('id', '?', $userId)
+            Database::expr()->eq('id', $userId)
         );
         $db->execute();
     }
